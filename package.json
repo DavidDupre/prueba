@@ -1,0 +1,19 @@
+{
+  "name": "microfrontends-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "shell",
+    "FrontProLinkTICDemo"
+  ],
+  "scripts": {
+    "install:all": "npm install --workspaces"
+  },
+  "dependencies": {
+    "quasar": "^2.6.0",
+    "vue": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
