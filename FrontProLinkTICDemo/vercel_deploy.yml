@@ -1,0 +1,22 @@
+trigger:
+- dev
+ 
+pool:
+  vmImage: ubuntu-latest
+ 
+variables:
+  isDev: $[eq(variables['Build.SourceBranch'], 'refs/heads/dev')]
+ 
+steps:
+- task: vercel-deployment-task@1
+  name: 'Deploy'
+  inputs:
+    condition: or(eq(variables.isDev, true), eq(variables['Build.Reason'], 'PullRequest'))
+    vercelProjectId: 'prj_5NqTzg2UPRVQNpcXckAb1zAzxvCc'
+    vercelOrgId: 'team_9MGyVrgKm7irlyYyNHlqrKbX' 
+    vercelToken: $(VERCEL_TOKEN)
+    production: $(isDev)
+- task: vercel-azdo-pr-comment-task@1
+  inputs:
+    azureToken: $(AZURE_TOKEN)
+    deploymentTaskMessage: $(Deploy.deploymentTaskMessage)

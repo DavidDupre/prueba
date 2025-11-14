@@ -1,0 +1,443 @@
+<template>
+  <div>
+    <section>
+      <q-form ref="asignarRef">
+        <q-card class="tw-rounded-xl tw-mt-4" flat bordered>
+          <q-expansion-item default-opened>
+            <template v-slot:header>
+              <div class="col row">
+                <h3 class="text-bold tw-text-xl d tw-flex-1 q-px-md">
+                  Enviar a Aprobación
+                </h3>
+              </div>
+            </template>
+            <div class="tw-bg-white q-mt-lg" style="border-radius: 5px">
+              <div
+                class="full-width q-px-lg q-pb-lg alineation tw-gap-3 tw-flex"
+              >
+                <div
+                  class="width-container tw-w-1/2 q-px-sm tw-rounded-xl"
+                  style="border: 1px solid #e3e4e5"
+                >
+                  <TableAsignar
+                    :TABLE_BODY="listUsers"
+                    :TABLE_HEADER="columnsAsignar"
+                    :listadoOficinas="filteredOficinas"
+                    @update:item-selected="handleAssign"
+                    row-key="colaborador"
+                    :is-selection="false"
+                    :mySelection="tableSelection"
+                    type-selection="single"
+                    :filtered="filteredOficinas"
+                    @update:officeSelected="filterUser"
+                    @update:dragEvent="dragRevisor"
+                  />
+                </div>
+                <div
+                  class="width-container tw-w-1/2 q-pa-sm q-px-lg tw-pt-3 tw-rounded-xl"
+                  style="border: 1px solid #e3e4e5"
+                  @dragover.prevent
+                  @drop="dropTable(cardsAsignar, tableSelection)"
+                >
+                  <span
+                    class="full-width tw-text-lg tw-text-[#2C3948] tw-font-bold"
+                  >
+                    Este es el usuario aprobador que ha seleccionado
+                  </span>
+                  <div class="flex wrap tw-gap-3 q-pt-sm">
+                    <div v-for="(asign, index) in cardsAsignar" :key="index">
+                      <div
+                        v-if="asign.visible"
+                        class="q-px-sm tw-text-base q-py-sm tw-gap-2 flex justify-between tw-text-[#2C3948] tw-rounded-3xl"
+                        style="border: 1px solid #e3e4e5"
+                      >
+                        <q-icon size="24px" name="person_outline" />
+                        {{ asign.name }}
+                        <q-icon
+                          class="tw-cursor-pointer"
+                          size="24px"
+                          name="close"
+                          @click="removeCardAsignar(asign.user)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </q-expansion-item>
+        </q-card>
+      </q-form>
+    </section>
+    <div
+      class="justify-center tw-w-full tw-m-[10px] tw-mt-10 tw-mb-6 tw-flex tw-gap-4"
+    >
+      <q-btn
+        label="Cancelar"
+        type="reset"
+        style="width: 240px; height: 40px"
+        text-color="black"
+        color="accent"
+        class="tw-rounded-xl"
+        @click="() => (showModal = true)"
+      />
+      <q-btn
+        label="Enviar"
+        text-color="white"
+        @click="showModalAsigna"
+        style="width: 240px; height: 40px"
+        color="primary"
+        class="tw-rounded-xl tw-btn tw-p-2"
+      />
+    </div>
+  </div>
+
+  <Modal
+    v-model:model-value="showModal"
+    title="¡Espera un momento!"
+    text="Al cancelar el proceso perderá los datos ingresados en el formulario, ¿desea realizar la acción?"
+    :is-success="false"
+    textButtonCancel="No"
+    cancel-button
+    @handleAccept="
+      showModal = false;
+      router.go();
+    "
+    text-button="Si"
+    @close-modal="() => (showModal = false)"
+  />
+
+  <Modal
+    v-model:model-value="showConfirmationModal"
+    title="Confirmación"
+    :text="`¿Está seguro que desea enviar el trámite para aprobación?`"
+    :is-success="false"
+    textButtonCancel="Cancelar"
+    cancel-button
+    @handleAccept="handleAcceptModal"
+    text-button="Aceptar"
+    @close-modal="() => (showConfirmationModal = false)"
+  />
+</template>
+
+<script lang="ts" setup>
+import TableAsignar from "./TableAsignar.vue";
+import { sgdeaAxios } from "src/services";
+import { onMounted, ref } from "vue";
+import { toast } from "src/helpers/toast";
+import { useRouter } from "vue-router";
+import Modal from "src/components/Modal/Modal.vue";
+import { useAuthStore } from "src/stores/auth.store";
+import { crearTrazabilidad } from "src/helpers/trazabilidad";
+import { crearTrazabilidadDocumento } from "src/helpers/trazabilidadDocumento";
+
+const tableSelection = ref([]);
+const router = useRouter();
+const showModal = ref(false);
+const asignarRef = ref();
+const showConfirmationModal = ref(false);
+const listadoOficinas = ref([]);
+const originalListUsers = ref([]);
+const auth = useAuthStore();
+const props = withDefaults(
+  defineProps<{
+    pqrData: any[];
+    pqrdMetadata: any[];
+    pqrdDocsalida: any[];
+    pqrdDatossalida: any[];
+    isChangeDoc: boolean;
+  }>(),
+  {}
+);
+const idOficina = ref();
+const listUsers = ref([]);
+const cardsAsignar = ref([]);
+const totalUsers = ref([]);
+const filteredOficinas = ref();
+const asignarUsuarioBody = ref({
+  usuarioAsignado: "",
+  idUser: "",
+  motivoAsignacion: "",
+  usuarioConsolidador: "",
+});
+
+onMounted(async () => {
+  await loadOficina();
+  await loadUsers(undefined, true);
+  filteredOficinas.value = listUsers.value.map(
+    (e: { firstname: any; lastname: any; id: any }) => {
+      return {
+        label: e.colaborador,
+        value: e.id,
+      };
+    }
+  );
+  originalListUsers.value = listUsers.value;
+
+});
+
+const loadOficina = async () => {
+  try {
+    const response = await sgdeaAxios.get("/pqrd/listadoOficinas");
+    if (response.status == 200 || response.status == 201) {
+      listadoOficinas.value = response.data.map(
+        (e: { nombre: any; id: any }) => {
+          return {
+            label: e.nombre,
+            value: e.id,
+          };
+        }
+      );
+      listadoOficinas.value = listadoOficinas.value.filter((e) => {
+        return e.value !== 26;
+      });
+      //filteredOficinas.value = listadoOficinas.value
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+function filterUser(filterby) {
+  listUsers.value = originalListUsers.value.filter((e) => e.id == filterby);
+}
+
+const loadUsers = async (selectedOffice?: any, initial: boolean = false) => {
+  const { relations } = auth.userInfo;
+  let dependencias = [];
+  try {
+    if (initial) {
+      for (const oficina of relations) {
+        // Para evitar consultar la misma oficina
+        if (!dependencias.includes(oficina.dependencia)) {
+          dependencias.push(oficina.dependencia);
+          if (oficina === "N/A") break;
+
+          selectedOffice = listadoOficinas.value.find(
+            (e) => e.label === oficina.oficina
+          )?.value;
+          const response = await sgdeaAxios.get(
+            `/api/usuarios/rolYoficina?rolName=Aprobador`
+          ); // &oficinaId=${idOficina.value}
+          if (response.status == 200) {
+            const users = response.data;
+            const res = users
+              .map((e) => {
+                return {
+                  colaborador: e.firstname + " " + e.lastname,
+                  cargo: e.cargo ? e.cargo.nombre: "",
+                  grupo: e.usuarioRelaciones[0]?.oficina?.nombre
+                    ? e.usuarioRelaciones[0]?.oficina?.nombre
+                    : e.usuarioRelaciones[0]?.seccionSubSeccion?.nombre, // e.usuarioRelaciones.map((e) => { return e.oficina }).find((item) => { return item?.id == idOficina.value })?.nombre,
+                  id: e.id,
+                };
+              })
+              .sort((a, b) => a.colaborador.localeCompare(b.colaborador));
+            listUsers.value = [...listUsers.value, ...res];
+          }
+        }
+      }
+      return;
+    }
+    const response = await sgdeaAxios.get(
+      `/api/usuarios/rolYoficina?rolName=Aprobador`
+    ); // &oficinaId=${idOficina.value}
+    if (response.status == 200) {
+      listUsers.value = response.data;
+      const res = listUsers.value.map((e) => {
+        return {
+          colaborador: e.firstname + " " + e.lastname,
+          cargo: e.cargo.nombre,
+          grupo: e.usuarioRelaciones
+            .map((e) => {
+              return e.oficina;
+            })
+            .find((item) => {
+              return item?.id == idOficina.value;
+            })?.nombre,
+          id: e.id,
+        };
+      });
+      listUsers.value = res;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const columnsAsignar = [
+  {
+    name: "colaborador",
+    label: "Colaborador",
+    field: "colaborador",
+    sortable: true,
+    align: "center",
+  },
+  {
+    name: "cargo",
+    label: "Cargo",
+    field: "cargo",
+    sortable: true,
+    align: "center",
+  },
+  {
+    name: "grupo",
+    label: "Grupo",
+    field: "grupo",
+    sortable: true,
+    align: "center",
+  },
+];
+
+const removeCardAsignar = (user) => {
+  const indexSelection = tableSelection.value.findIndex(
+    (item) => item.id == user
+  );
+  tableSelection.value.splice(indexSelection, 1);
+  const index = cardsAsignar.value.findIndex((card) => card.user === user);
+  cardsAsignar.value.splice(index, 1);
+};
+
+const handleAssign = (array: any[]) => {
+  if (array.length === 0) {
+    cardsAsignar.value = [];
+    tableSelection.value = [];
+    asignarUsuarioBody.value.usuarioAsignado = "";
+    asignarUsuarioBody.value.idUser = "";
+  } else {
+    cardsAsignar.value = array.map((item) => ({
+      name: item.colaborador,
+      visible: true,
+      user: item.id,
+    }));
+    tableSelection.value = array;
+
+    if (array.length > 0) {
+      tableSelection.value = array;
+      const firstSelected = array[0];
+      asignarUsuarioBody.value.usuarioAsignado = firstSelected.colaborador;
+      asignarUsuarioBody.value.idUser = firstSelected.id;
+    }
+  }
+  totalUsers.value = cardsAsignar.value.map((e) => {
+    return { label: e.name, value: e.user };
+  });
+};
+
+const handleAcceptModal = async () => {
+  try {
+    const response = await sgdeaAxios.post(
+      `/pqrd/asignarPqrdUsuarioPorAprobar/?idAprobador=${cardsAsignar.value[0].user}&idAsignacion=${props.pqrData.asignacionPqrdEntity.idAsignacion}`
+    );
+
+    if (response.status == 200 || response.status == 201) {
+      showConfirmationModal.value = false;
+      auth.userInfo.userid;
+      toast.success("El radicado ha sido enviado para aprobación con éxito");
+      if (props.isChangeDoc === true) {
+        await crearTrazabilidadDocumento(
+          {
+            htmlContent: props.pqrdDocsalida[0].htmlContent,
+            usuario: auth.userInfo.name,
+            rol: auth.userInfo.role,
+          },
+          props.pqrdDocsalida[0].id,
+          "PQRD"
+        );
+      }
+      await crearTrazabilidad({
+        proceso: `PQRD${props.pqrData.id}`,
+        secuencia: props.pqrData.idRadicado,
+        estado: props.pqrData.estado.estado,
+        descripcion:
+          `Asignador: ${auth.$state.userInfo.name} \n` +
+          `Aprobador: ${cardsAsignar.value[0].name} \n` +
+          `Motivo: Se ha enviado a aprobación el radicado`,
+        comentario: "Asignado",
+        nombre: auth.$state.userInfo.name,
+        accion: `${auth.$state.userInfo.name} ha asignado el radicado ${props.pqrData.idRadicado}`,
+        tramite:
+          props.pqrData.informacionSolicitud.tipologiaEntity.id == 7
+            ? "PQRD Express"
+            : "PQRD",
+      });
+
+      await router.push("/bandeja");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const showModalAsigna = async () => {
+  if (!(await asignarRef.value.validate())) {
+    toast.error("Para continuar, asegúrese de que todos los campos requeridos estén completos.");
+    return;
+  }
+
+  if (!props.pqrdMetadata?.favorabilidad) {
+    toast.error("Se debe ingresar todos los campos obligatorios del formulario Metadatos para enviar a revisión");
+    return;
+  }
+
+  if (!props.pqrdDocsalida.length) {
+    toast.error("Se debe crear un documento de salida como respuesta al trámite a un expediente para enviar a revisión");
+    return;
+  }
+
+  if (!props.pqrdDatossalida?.asunto) {
+    toast.error("Se debe ingresar todos los campos obligatorios del formulario Datos de salida para enviar a revisión");
+    return;
+  }
+
+  if (cardsAsignar.value.length === 0) {
+    toast.error("Debe seleccionar un usuario para completar la acción");
+    return;
+  }
+
+  showConfirmationModal.value = true;
+};
+
+const rowSelected = ref();
+
+const dragRevisor = (evt) => {
+  const item = evt;
+  const isExist =
+    cardsAsignar.value.findIndex((card) => card.user === item.id) === -1;
+
+  if (isExist) {
+    cardsAsignar.value = [];
+    tableSelection.value = [];
+    cardsAsignar.value.push({
+      name: item.colaborador,
+      visible: true,
+      user: item.id,
+    });
+    tableSelection.value.push(item);
+    totalUsers.value = cardsAsignar.value;
+  } else {
+    toast.error("El usuario ya fue agregado");
+  }
+};
+
+const dropTable = (cards, selection) => {
+  if (rowSelected.value) {
+    // Verifica si el elemento ya está en la lista
+    const exists = cards.value.some(
+      (card) => card.user === rowSelected.value.id
+    );
+    if (!exists) {
+      // Añade el nuevo elemento a la lista
+      cards.value.push({
+        name: rowSelected.value.colaborador,
+        visible: true,
+        user: rowSelected.value.id,
+      });
+      selection.value.push(rowSelected.value);
+    } else {
+      toast.error("El usuario ya fue agregado");
+    }
+    rowSelected.value = null; // Limpia la referencia de `rowSelected` después de agregar
+  }
+};
+</script>

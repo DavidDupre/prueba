@@ -1,0 +1,29 @@
+trigger:
+- prod-gcp
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Infraestructura-DevOps/devops_util_pipeline
+stages:
+- stage: Build_Docker
+  jobs:
+  - job: Build_Docker
+    steps:
+
+    - template: steps-docker-gcp.yml@templates
+      parameters:
+        REPOSITORY_NAME_GCP: $(DOCKER_REPOSITORY_NAME_GCP_PROD)
+        DOCKER_PATH: '$(Build.SourcesDirectory)/dockerfile'
+ 
+  - job: Analysis
+    steps:
+    - template: sonar-steps-web-based.yml
+      parameters:
+        sonarHost: SONAR_QUBE
+        sonarKey: 339_ProLinktic_FrontProLinkTIC
+        sonarProjectName: 339_ProLinktic_FrontProLinkTIC

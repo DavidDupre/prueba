@@ -1,0 +1,30 @@
+parameters:
+- name: sonarHost
+  type: string
+  default: ''
+- name: sonarKey
+  type: string
+  default: ''
+- name: sonarProjectName
+  type: string
+  default: ''
+- name: sonarInclusions
+  type: string
+  default: ''
+
+steps:
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: ${{ parameters.sonarHost }}
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: ${{ parameters.sonarKey }}
+    cliProjectName: ${{ parameters.sonarProjectName }}
+    cliSources: '.'
+    extraProperties: |
+      "sonar.inclusions=${{ parameters.sonarInclusions }}"
+
+- task: SonarQubeAnalyze@5
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'

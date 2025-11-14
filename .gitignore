@@ -1,0 +1,26 @@
+# Ignorar dependencias
+node_modules/
+
+# Ignorar archivos de build
+/dist
+/dist-spa
+/dist-ssr
+/dist-electron
+/dist-cordova
+/dist-capacitor
+
+# Ignorar archivos temporales
+*.log
+*.tmp
+
+# Ignorar configuraciones locales
+.env.local
+.env.*.local
+
+# Ignorar IDE y editor
+.vscode/
+.idea/
+
+# Ignorar sistema operativo
+.DS_Store
+Thumbs.db

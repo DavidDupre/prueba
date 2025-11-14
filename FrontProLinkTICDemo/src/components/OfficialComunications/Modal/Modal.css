@@ -1,0 +1,46 @@
+.custom-modal {
+  width: 560px;
+  height: fit-content;
+  /* top: 50%; */
+  /* left: 50%; */
+  transform: translate(0%, 0%);
+  padding: 40px;
+  border-radius: 20px;
+  gap: 25px !important;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 24px;
+  color: #0A1B48;
+  text-align: left;
+}
+
+.modal-subtitle {
+  font-family: 'TT Hoves Pro Trial';
+  font-size: 18px;
+  text-align: left;
+  color: #969EAF;
+}
+
+.custom-select {
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  width: 440px; /* Ajusta el ancho según tus necesidades */
+}
+
+.select-icon {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.modal-button {
+  width: 220px;
+  height: 48px;
+  padding: 12px 10px 12px 10px;
+  border-radius: 8px;
+  gap: 10px;
+
+}
+

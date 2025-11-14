@@ -1,0 +1,31 @@
+export interface Facturacion {
+  id_factura_a: number;
+  dependencia: string;
+  responsable: string;
+  tipoTramite: string;
+  tipoRemitente: string;
+  pais: string;
+  departamento: string;
+  municipio: string;
+  canal: string;
+  tipoDocumento: string;
+  numeroDocumento: number;
+  primerNombre: string;
+  segundoNombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+  otrosNombres: string;
+  direccion: string;
+  telefono: number;
+  celular: number;
+  email: string;
+  sec: string;
+  numeroFactura: string;
+  descripcion: string;
+  valor: number;
+  valorLetra: string;
+  medio: string;
+  fecha_hora: string;
+  estado: string;
+  nodeId: string;
+}

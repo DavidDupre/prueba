@@ -1,0 +1,31 @@
+trigger:
+  - dev
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Infraestructura-DevOps/devops_util_pipeline
+stages:
+  - stage: Build_Docker
+    jobs:
+      - job: Build_Docker
+        steps:
+          - script: |
+              aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+            displayName: "Login to AWS"
+            env:
+              AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+              AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+
+          - template: steps-docker-ecr.yml@templates
+            parameters:
+              AWS_CREDENTIALS: "prolinktic"
+              REPOSITORY_NAME: $(DOCKER_REPOSITORY_NAME)
+              AWS_REGION: $(AWS_REGION)
+              DOCKER_PATH: "$(Build.SourcesDirectory)/dockerfile"
+
+      

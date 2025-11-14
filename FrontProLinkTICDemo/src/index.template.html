@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= productName %>
+  </title>
+
+  <meta charset="utf-8" />
+  <meta name="description" content="<%= productDescription %>" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport"
+    content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>" />
+  <!-- Evita el cacheo del navegador -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/favicon-128x128.png?v=<%= APP_VERSION %>" />
+  <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png?v=<%= APP_VERSION %>" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png?v=<%= APP_VERSION %>" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png?v=<%= APP_VERSION %>" />
+  <link rel="icon" type="image/ico" href="favicon.ico?v=<%= APP_VERSION %>" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNZYVY55ZK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-LNZYVY55ZK");
+  </script>
+
+  <script type="text/javascript">
+  (function() {
+    var envType = '<%= process.env.NODE_ENV_TYPE %>';
+    var clarityId;
+    
+    if (envType !== "development") {
+      clarityId = 't26cr7k6v9'; // Producción
+    } else {
+      clarityId = 't2k8d12m64';
+    }
+    
+    // Cargar Clarity
+    (function(c, l, a, r, i, t, y) {
+      c[a] = c[a] || function() { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", clarityId);
+  })();
+</script>
+
+  <!-- Versión y control de caché -->
+  <script>
+    window.APP_VERSION = "<%= APP_VERSION %>_<%= Date.now() %>";
+
+    try {
+      const lastVersion = localStorage.getItem("APP_VERSION");
+      const currentVersion = window.APP_VERSION;
+
+      if (lastVersion && lastVersion !== currentVersion) {
+        localStorage.setItem("APP_VERSION", currentVersion);
+        location.reload(true); // Fuerza recarga si cambia la versión
+      } else {
+        localStorage.setItem("APP_VERSION", currentVersion);
+      }
+    } catch (e) {
+      console.warn("No se pudo verificar versión:", e);
+    }
+  </script>
+</head>
+
+<body>
+  <!-- DO NOT touch the following DIV -->
+  <div id="q-app"></div>
+  <div id="load-docs"></div>
+</body>
+
+</html>

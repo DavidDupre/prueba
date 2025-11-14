@@ -1,0 +1,18 @@
+.dark-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Oscuro con 70% de opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Asegura que el spinner y el mensaje estén uno debajo del otro */
+  z-index: 2000; /* Asegúrate de que esté por encima de otros elementos en la página */
+}
+
+.message {
+  color: #003352;
+  margin-top: 10px; /* Un poco de espacio entre el spinner y el mensaje */
+}

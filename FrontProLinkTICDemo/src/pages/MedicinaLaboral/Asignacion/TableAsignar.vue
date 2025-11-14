@@ -1,0 +1,153 @@
+<template>
+  <div>
+    <q-table flat :rows="TABLE_BODY" :columns="TABLE_HEADER" :row-key="rowKey" table-header-class="text-black text-h6 "
+      class="sizes q-mr-md" style="margin: 0 auto; border-radius: 15px; min-height: auto; max-height: 400px "
+      :filter="filterValue" rows-per-page-label="Páginas" selection="single" v-model:selected="selection" virtual-scroll
+      :rows-per-page-options="[8]" @row-dblclick="handleDoubleClick">
+      <template v-slot:body-cell-colaborador="props" :draggable="true" auto-width class="tw-bg-blue">
+        <td class="tw-text-center tw-bg-blue tw-cursor-pointer" :draggable="true" @dragstart="dragGestor(props.row)">
+          {{ props.row.colaborador }}
+        </td>
+      </template>
+      <template v-slot:top-left>
+        <span class="full-width tw-text-lg tw-text-[#2C3948] tw-font-bold tw-mb-2">
+          {{ props.title }}
+        </span>
+        <q-select v-if="canSearch" :options="filteredOficinas" hide-selected fill-input input-debounce="0" use-input
+          v-model="formData.Oficinas" class="tw-w-full" @filter="selectOptionsFilterFn" outlined dense
+          :placeholder="placeholder">
+          <template v-slot:prepend>
+            <q-icon name="search" />
+          </template>
+
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No hay resultados
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
+      </template>
+
+    </q-table>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { onBeforeUpdate, ref, watch, type Ref } from "vue";
+
+const selection = ref([])
+const emit = defineEmits(['update:itemSelected', 'update:officeSelected', 'update:dragEvent', 'update:handleDblClickEvent'])
+
+const props = withDefaults(defineProps<{
+  TABLE_BODY: any[],
+  TABLE_HEADER: any[],
+  itemsSelected?: any[],
+  text?: string,
+  rowKey: string,
+  placeholder: string,
+  abogado?: number,
+  valueRadio?: string,
+  title: string,
+  canSearch?: boolean,
+  listadoOficinas: any[],
+  filtered: any[]
+  mySelection: any[],
+  rowGestor: Ref<any>,
+}>(), {
+  title: 'Seleccione los usuarios que desea asignar al radicado',
+  rowKey: 'numeroTable',
+  isSelection: true,
+  placeholder: 'Busque por nombre de usuario',
+  canSearch: true,
+})
+
+const formData = ref({
+  Oficinas: '',
+  Consolidador: '',
+  Observaciones: '',
+})
+
+const filterValue = ref('')
+const rows = props.TABLE_BODY
+const filteredRows = ref(rows)
+const listadoOficinas = ref()
+const filteredOficinas = ref()
+
+watch(filterValue, (newValue) => {
+  if (newValue) {
+    filteredRows.value = rows.filter(row =>
+      row.colaborador.toLowerCase().includes(newValue.toLowerCase())
+    );
+  } else {
+    filteredRows.value = rows;
+  }
+});
+
+watch(props.mySelection, (newValue) => {
+  if (newValue) {
+    filteredRows.value = rows.filter(row =>
+      // @ts-expect-error
+      row.colaborador.toLowerCase().includes(newValue.toLowerCase())
+    );
+  }
+});
+
+
+watch(() => props.listadoOficinas, (newListadoOficinas) => {
+  listadoOficinas.value = newListadoOficinas
+});
+
+const dragGestor = (row: any) => {
+  selection.value = [];
+  const newRow = { ...row, selected: true };
+  selection.value.push(newRow);
+  emit('update:dragEvent', row);
+}
+
+const handleDoubleClick = (_, row: any) => {
+  if (row) {
+    selection.value = [];
+    const newRow = { ...row, selected: true };
+    selection.value.push(newRow);
+    emit('update:handleDblClickEvent', row);
+  }
+}
+
+const selectOptionsFilterFn = (val: string, update: any) => {
+  if (val == '') {
+    update(() => {
+      filteredOficinas.value = listadoOficinas.value
+    })
+    return
+  }
+  update(() => {
+    filteredOficinas.value = listadoOficinas.value.filter((option) => {
+      return option.label.toLowerCase().includes(val.toLowerCase());
+    });
+  })
+};
+
+const validado = ref(0)
+onBeforeUpdate(() => {
+  if (props.abogado && validado.value == 0) {
+    validado.value++
+    selection.value = [props.TABLE_BODY[props.abogado]];
+  } else if (!props.abogado && validado.value == 1) {
+    validado.value = 0
+    selection.value = []
+  } else if (props.valueRadio == 'YES' && validado.value == 1) {
+    selection.value = [props.TABLE_BODY[props.abogado]];
+  }
+})
+watch(selection, (newdateData) => {
+  emit('update:itemSelected', newdateData)
+});
+
+watch(() => formData.value.Oficinas, (newOffice) => {
+  // @ts-ignore
+  emit('update:officeSelected', newOffice.value);
+});
+
+</script>

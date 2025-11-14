@@ -1,0 +1,356 @@
+/* app global css */
+
+:root {
+  /* --primary: #00A0FF; */
+  /* --secondary: #003352; */
+  --primary: #ff7500;
+  --secondary: #003352;
+  --labels: #969eaf;
+  /*'blue-button': #006FB0;*/
+  /* 'gray-texts': '#505050',
+
+  'redtrigger': '#FFDFDF',
+  'redbordertrigger': '#EA0000',
+  'gray-sky': '#EAECF0',
+  'blue-fondo': '#F2FDF1' */
+  /*'blue-button': #006FB0;*/
+  /* 'gray-texts': '#505050',
+
+  'redtrigger': '#FFDFDF',
+  'redbordertrigger': '#EA0000',
+  'gray-sky': '#EAECF0',
+  'blue-fondo': '#F2FDF1' */
+}
+.contrast-high {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+body.contrast-high {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+body.contrast-high a,
+body.contrast-high .q-btn {
+  color: #fff !important;
+  background-color: #222 !important;
+  border: 1px solid #fff;
+}
+
+body.contrast-high label,
+body.contrast-high input,
+body.contrast-high span,
+body.contrast-high header,
+body.contrast-high .q-scrollarea__container,
+body.contrast-high .q-layout__section
+body.contrast-high .q-input,
+body.contrast-high .q-select,
+body.contrast-high .q-card,
+body.contrast-high .q-header{
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+body.contrast-high header,
+body.contrast-high .header,
+body.contrast-high .topbar,
+body.contrast-high .q-header,
+body.contrast-high .navbar {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ffffff !important;
+}
+body.contrast-high header > div {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ffffff !important;
+}
+body.contrast-high .loading-overlay {
+  background: #000000 !important;
+}
+
+body.contrast-high .loader,
+body.contrast-high .loader:before,
+body.contrast-high .loader:after {
+  background:
+    radial-gradient(closest-side at 70% 12.5%, #ffffff 96%, #0000) 50% 0/20% 80% repeat-y,
+    radial-gradient(closest-side at 12.5% 70%, #ffffff 90%, #0000) 0 50%/80% 20% repeat-x;
+}
+body.contrast-high .q-card > div {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid #ffffff !important;
+}
+body.contrast-high .q-input,
+body.contrast-high .q-select {
+  border: 1px solid #ffffff !important;
+}
+body.contrast-high .q-page-container {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+body.contrast-high .q-field__label {
+  color: #ffffff !important;
+}
+body.contrast-high .q-icon,
+body.contrast-high svg {
+  filter: invert(1) brightness(200%);
+}
+.contrast-high .q-icon{
+  color: #ff8000 !important;
+}
+body.contrast-high .q-btn:hover {
+  background-color: #333 !important;
+  border-color: #fff !important;
+}
+.contrast-high .q-card,
+.contrast-high .q-input,
+.contrast-high .q-select,
+.contrast-high .q-btn,
+.contrast-high .div,
+.contrast-high .q-header {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+body.contrast-high .modal-wrapper {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff;
+}
+/* Texto escrito en inputs y selects */
+.high input,
+.high textarea,
+.high .q-field__native,
+.high .q-select__input,
+.high div
+ {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+}
+
+/* Placeholder */
+.high ::placeholder {
+  color: #bbbbbb !important;
+}
+
+/* Etiquetas */
+.high .q-field__label,
+.high label {
+  color: #ffffff !important;
+}
+
+/* Opciones desplegables */
+.high .q-menu,
+.high .q-item {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Opciones hover */
+.high .q-item--active,
+.high .q-item:hover {
+  background-color: #222222 !important;
+}
+
+/* Bordes de campos */
+.high .q-field {
+  border: 1px solid #ffffff !important;
+}
+/* Texto escrito en inputs y selects */
+body.contrast-high input,
+body.contrast-high textarea,
+body.contrast-high .q-field__native,
+body.contrast-high .q-select__input {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+}
+
+/* Placeholder */
+body.contrast-high ::placeholder {
+  color: #bbbbbb !important;
+}
+
+/* Etiquetas */
+body.contrast-high .q-field__label,
+body.contrast-high label {
+  color: #ffffff !important;
+}
+
+/* Opciones desplegables */
+body.contrast-high .q-menu,
+body.contrast-high .q-item {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Opciones hover */
+body.contrast-high .q-item--active,
+body.contrast-high .q-item:hover {
+  background-color: #222222 !important;
+}
+
+/* Bordes de campos */
+body.contrast-high .q-field {
+  border: 1px solid #ffffff !important;
+}
+
+
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 14px;
+  background: transparent;
+  z-index: 12;
+  overflow: visible;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  z-index: 12;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  -webkit-transition: background-color .28s ease-in-out;
+  transition: background-color .28s ease-in-out;
+  margin: 4px;
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.q-tabs--horizontal .q-tabs__arrow {
+  top: calc(50% / 2) !important;
+}
+
+.q-icon{
+  font-size: 24px;
+  display: inline-block;
+}
+
+@font-face {
+  font-family: HovesProTrial;
+  src: url("../assets/fonts/subset-TTHovesProTrial-Rg.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: HovesProTrial;
+  src: url("../assets/fonts/subset-TTHovesProTrial-Md.woff2") format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: HovesProTrial;
+  src: url("../assets/fonts/subset-TTHovesProTrial-DmBd.woff2") format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: HovesProTrial;
+  src: url("../assets/fonts/subset-TTHovesProTrial-Bd.woff2") format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+
+body {
+  font-family: "HovesProTrial", serif;
+}
+
+.text-bold {
+  font-family: "HovesProTrial", serif;
+  font-weight: 800;
+}
+
+.q-btn {
+  min-height: 2px !important;
+  padding: 2px 5px !important;
+  text-transform: none !important;
+  font-weight: bold !important;
+  border-radius: 6px !important;
+}
+
+thead tr th {
+  font-weight: bold !important;
+  font-size: 12px !important;
+}
+
+tbody tr td {
+  text-align: center !important;
+  font-size: 12px !important;
+}
+
+.q-table th.sortable:hover .q-table__sort-icon {
+  color: black !important;
+  opacity: 1 !important;
+}
+
+.q-field--outlined .q-field__control:before {
+  border: 1px solid #eaecf0 !important;
+  box-shadow: 2px 2px 6px 1px #cbd0e440;
+}
+
+.q-checkbox__bg {
+  border: 1px solid #cdcedf !important;
+  box-shadow: 2px 2px 6px 1px #cbd0e440 !important;
+}
+
+.progress-success {
+  background-color: #00c853;
+  width: 100% !important;
+  opacity: 1;
+}
+
+.progress-error {
+  background-color: #d32f2f;
+  width: 100% !important;
+  opacity: 1;
+}
+
+.my-sticky-header-table {
+  height: 310px;
+}
+
+.my-sticky-header-table .q-table__top,
+.my-sticky-header-table .q-table__bottom,
+.my-sticky-header-table thead tr:first-child th {
+  background-color: #fff;
+}
+
+.my-sticky-header-table thead tr th {
+  position: sticky;
+  z-index: 1;
+}
+
+.my-sticky-header-table thead tr:first-child th {
+  top: 0;
+}
+
+.my-sticky-header-table &.q-table--loading thead tr:last-child th {
+  top: 48px;
+}
+
+.my-sticky-header-table tbody {
+  scroll-margin-top: 48px;
+}
+
+#load-docs {
+  display: none;
+  position: absolute;
+  z-index: -400px;
+}
+
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+.container_background {
+  border-radius: 12px !important;
+  background-color: #ffffff !important;
+  margin-bottom: 20px !important;
+}
+

@@ -1,0 +1,63 @@
+trigger:
+- dev
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  isDev: $[eq(variables['Build.SourceBranch'], 'refs/heads/dev')]
+
+steps:
+- checkout: self
+  persistCredentials: true
+  fetchDepth: 0  # Fetch all history for all branches and tags
+
+- script: |
+    echo "Starting version increment and CHANGELOG update..."
+
+    # Fetch only the dev branch
+    git fetch origin dev:dev
+    git checkout dev || git checkout -b dev origin/dev
+    echo "checked out
+    
+    # Increment patch version in package.json
+    echo "Incrementing patch version in package.json..."
+    npm version patch --no-git-tag-version
+
+    # Extracting Pull Request ID and other info using predefined variables
+    # PR_ID=$(System.PullRequest.PullRequestId)
+    # PR_TITLE=$(System.PullRequest.SourceBranch)
+    # Use additional variables as needed
+
+    # Append PR details to CHANGELOG.md
+    # echo "Updating CHANGELOG.md..."
+    # echo -e "\n## Update from PR $PR_ID - $PR_TITLE\n" >> CHANGELOG.md
+
+    # Git configuration and commit
+    git config user.email "andres.gonzalez@linktic.com"
+    git config user.name "AndresLinktic"
+    git add package.json CHANGELOG.md
+    echo "before commit"
+    git commit -m "Auto-update version and CHANGELOG with PR details [skip ci]"
+    echo "before push"
+    git push origin dev
+    echo "pushed"
+
+  displayName: 'Run update scripts and push changes'
+  env:
+    System.AccessToken: $(AZURE_TOKEN)
+
+# Remaining Vercel deployment tasks can be uncommented and used as needed
+# - task: vercel-deployment-task@1
+#   name: 'Deploy'
+#   inputs:
+#     condition: or(eq(variables.isDev, true), eq(variables['Build.Reason'], 'PullRequest'))
+#     vercelProjectId: 'prj_5NqTzg2UPRVQNpcXckAb1zAzxvCc'
+#     vercelOrgId: 'team_9MGyVrgKm7irlyYyNHlqrKbX' 
+#     vercelToken: $(VERCEL_TOKEN)
+#     production: $(isDev)
+
+# - task: vercel-azdo-pr-comment-task@1
+#   inputs:
+#     azureToken: $(AZURE_TOKEN)
+#     deploymentTaskMessage: $(Deploy.deploymentTaskMessage)

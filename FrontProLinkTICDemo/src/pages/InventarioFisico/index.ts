@@ -1,0 +1,123 @@
+export const routes = [
+  {
+    name: "Inicio",
+    to: "/home",
+  },
+  {
+    name: "Inventario Físico",
+  },
+];
+
+export const EXPEDIENTE_HEADER = [
+  {
+    name: "id",
+    align: "center",
+    label: 'ID',
+    field: "id",
+    sortable: true,
+  },
+  {
+    name: "numeroExpediente",
+    align: "center",
+    label: "Número expediente",
+    field: "numeroExpediente",
+    sortable: true,
+  },
+  {
+    name: "numeroRadicado",
+    align: "center",
+    label: "Número de radicado",
+    field: "numeroRadicado",
+    sortable: true,
+  },
+  {
+    name: "fechaInicio",
+    align: "center",
+    label: "Fecha inicial expediente",
+    field: "fechaInicio",
+    sortable: true,
+  },
+  {
+    name: "fechaFinal",
+    align: "center",
+    label: "Fecha final expediente",
+    field: "fechaFinal",
+    sortable: true,
+  },
+  {
+    name: "sucursal",
+    align: "center",
+    label: "Sucursal",
+    field: "sucursal",
+    sortable: true,
+  },
+  {
+    name: "dependencia",
+    align: "center",
+    label: "Dependencia",
+    field: "dependencia",
+    sortable: true,
+  },
+  {
+    name: "deposito",
+    align: "center",
+    label: "Depósito",
+    field: "deposito",
+    sortable: true,
+  },
+  {
+    name: "pasillo",
+    align: "center",
+    label: "Pasillo",
+    field: "pasillo",
+    sortable: true,
+  },
+  {
+    name: "tipoEstante",
+    align: "center",
+    label: "Tipo estante",
+    field: "tipoEstante",
+    sortable: true,
+  },
+  {
+    name: "estante",
+    align: "center",
+    label: "Estante",
+    field: "estante",
+    sortable: true,
+  },
+  {
+    name: "entrepano",
+    align: "center",
+    label: "Entrepaño",
+    field: "entrepano",
+    sortable: true,
+  },
+  {
+    name: "contenedor",
+    align: "center",
+    label: "Contenedor",
+    field: "contenedor",
+    sortable: true,
+  },
+  {
+    name: "tipoExpediente",
+    align: "center",
+    label: "Tipo Expediente",
+    field: "tipoExpediente",
+    sortable: true,
+  },
+  {
+    name: "estado",
+    align: "center",
+    label: "Estado Expediente",
+    field: "estado",
+    sortable: true,
+  },
+  {
+    name: "acciones",
+    align: "center",
+    label: "Acciones",
+    field: "acciones",
+  },
+];

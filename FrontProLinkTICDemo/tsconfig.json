@@ -1,0 +1,28 @@
+{
+  "extends": "./node_modules/@quasar/app-webpack/tsconfig-preset.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@mf-forms/*": [
+        "../mf-forms/src/*"
+      ],
+      "@mf-procesoJuridico/*": [
+        "../mf-procesoJuridico/src/*"
+      ],
+      "@shell/*": [
+        "../shell/src/*"
+      ],
+    },
+    "strict": false,
+    "lib": [
+      "ES2019",
+      "dom"
+    ],
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ]
+}
