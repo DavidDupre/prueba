@@ -129,14 +129,11 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { QBtn, QIcon, QTooltip } from 'quasar';
 import { ChartConfiguration } from '@shell/components/Charts/chart_donuts.vue';
-// @ts-ignore alias resolución fuera del contexto TS
-import MainContainer from '../../../mf-ministry-consultation/src/components/MainContainer.vue';
+import MainContainer from '../components/MainContainer.vue';
 import Chart from '@shell/components/Charts/chart_donuts.vue';
 import TableComponent from '@shell/components/Table.vue';
 import { ColoresEstado } from '@shell/assets/estados/estados';
-// @ts-ignore alias resolución fuera del contexto TS
 import TrazabilidadDialog from '@shell/components/TrazabilidadDialog.vue';
 import { h } from 'vue';
 
