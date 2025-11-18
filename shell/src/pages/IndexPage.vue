@@ -1,43 +1,61 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
-  </q-page>
+  <div class="q-pa-xl">
+    <div class="q-mb-lg">
+      <h5 class="text-h5 q-ma-none q-mb-md" style="font-weight: 600">
+        Remitente
+      </h5>
+    </div>
+
+    <FormComponentModel v-model="formData" :form="finalForm" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
+import { computed, reactive } from "vue";
+import FormJs from "../boot/form.json";
+import FormComponentModel from "../components/Forms/FormComponentModel.vue";
+import { fieldConfigParser } from "../components/Forms/formParser";
 
-const todos = ref<Todo[]>([
-  {
-    id: 1,
-    content: 'ct1'
-  },
-  {
-    id: 2,
-    content: 'ct2'
-  },
-  {
-    id: 3,
-    content: 'ct3'
-  },
-  {
-    id: 4,
-    content: 'ct4'
-  },
-  {
-    id: 5,
-    content: 'ct5'
+const props = defineProps<{
+  cotizacionId?: string | number;
+  isEdit?: boolean;
+  isCotFromCore: boolean;
+  ramo: number;
+}>();
+
+// estado reactivo para los valores del formulario (v-model)
+const formData = reactive<Record<string, unknown>>({});
+
+// helper que soporta tanto JSON-objeto como función exportada
+const resolveFormSource = (src: unknown, ramo: number | string) => {
+  if (typeof src === "function") {
+    return src(ramo);
   }
-]);
+  const key = String(ramo);
+  return src && typeof src === "object" && key in src
+    ? (src as Record<string, unknown>)[key]
+    : src;
+};
 
-const meta = ref<Meta>({
-  totalCount: 1200
+const formFieldsDatosGenerales = computed(() => {
+  const resolved = resolveFormSource(FormJs, props.ramo);
+  return resolved;
 });
+
+const finalForm = computed(() =>
+  fieldConfigParser(formFieldsDatosGenerales.value),
+);
+
+const emit = defineEmits<{
+  cancel: [];
+  continue: [data: Record<string, unknown>];
+}>();
+
+function onCancel() {
+  emit("cancel");
+}
+
+function onContinue() {
+  emit("continue", formData);
+}
 </script>

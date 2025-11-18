@@ -3,6 +3,7 @@
 
 import { defineConfig } from "#q-app/wrappers";
 import federation from "@originjs/vite-plugin-federation";
+import path from "node:path";
 
 export default defineConfig((/* ctx */) => {
   return {
@@ -22,17 +23,24 @@ export default defineConfig((/* ctx */) => {
       // Module Federation para microfrontend
       extendViteConf(viteConf) {
         viteConf.plugins = viteConf.plugins || [];
+
+        // Add Module Federation plugin
         viteConf.plugins.push(
           federation({
             name: "shell",
-            filename: "remoteEntry.js",
-            exposes: {
-              "./FormComponentModelInputs":
-                "src/components/Forms/FormComponentModelInputs.vue",
-            },
-            shared: ["vue", "quasar"],
           })
         );
+
+        viteConf.resolve = viteConf.resolve || {};
+        viteConf.resolve.alias = {
+          ...viteConf.resolve.alias,
+          "@mf-forms": path.resolve(__dirname, "../mf-forms/src"),
+          "@mf-login": path.resolve(__dirname, "../mf-login/src"),
+          "@FrontProLinkTICDemo": path.resolve(
+            __dirname,
+            "../FrontProLinkTICDemo/src"
+          ),
+        };
       },
       target: {
         browser: ["esnext"],

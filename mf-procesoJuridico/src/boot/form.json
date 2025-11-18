@@ -1,0 +1,296 @@
+{
+  "components": [
+    {
+      "label": " Tipo de radicado ",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0tx9fwk",
+        "columns": null
+      },
+      "id": "Field_0i8zsrs",
+      "key": "select_w6cno1i",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Jurisdicción",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0tx9fwk",
+        "columns": null
+      },
+      "id": "Field_1jn159c",
+      "key": "select_6tirll",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Tipo jurisdicción",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0tx9fwk",
+        "columns": null
+      },
+      "id": "Field_179d9qx",
+      "key": "select_x7uqwp",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Canal de recepción",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0tx9fwk",
+        "columns": null
+      },
+      "id": "Field_1g2tsig",
+      "key": "select_nvi2lv",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "País",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1xsmxpl",
+        "columns": null
+      },
+      "id": "Field_05egtg1",
+      "key": "textfield_5gsntp",
+      "validate": {
+        "required": true
+      },
+      "disabled": true
+    },
+    {
+      "label": "Departamento",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_1xsmxpl",
+        "columns": null
+      },
+      "id": "Field_1033isq",
+      "key": "select_2dh18f",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Municipio",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_1xsmxpl",
+        "columns": null
+      },
+      "id": "Field_1g6xh5u",
+      "key": "select_o61mcq",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_03kxk65",
+        "columns": null
+      },
+      "id": "Field_1js1rup"
+    },
+    {
+      "text": "Información del juzgado",
+      "type": "text",
+      "layout": {
+        "row": "Row_0sdi7i5",
+        "columns": null
+      },
+      "id": "Field_0qjnj1f"
+    },
+    {
+      "label": "Juzgado",
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_1vuvf49",
+        "columns": 10
+      },
+      "id": "Field_0j58hqi",
+      "key": "select_v8olfs",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Código del juzgado  ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1vuvf49",
+        "columns": null
+      },
+      "id": "Field_1wdya5c",
+      "key": "textfield_ij0bim"
+    },
+    {
+      "label": "Dirección del juzgado",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1iwef2y",
+        "columns": null
+      },
+      "id": "Field_18axwq3",
+      "key": "textfield_4eipz",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Teléfono juzgado",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1iwef2y",
+        "columns": null
+      },
+      "id": "Field_06ljvms",
+      "key": "textfield_3bidle",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Celular juzgado",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1iwef2y",
+        "columns": null
+      },
+      "id": "Field_015d3eb",
+      "key": "textfield_9y9b1m",
+      "validate": {
+        "required": true
+      },
+      "properties": {}
+    },
+    {
+      "label": "Correo electrónico juzgado",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0afx9dv",
+        "columns": null
+      },
+      "id": "Field_0c67okz",
+      "key": "textfield_bg8ioi",
+      "disabled": false,
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_0ynyw7d",
+        "columns": null
+      },
+      "id": "Field_13oxa5b"
+    },
+    {
+      "text": "Información del proceso",
+      "type": "text",
+      "layout": {
+        "row": "Row_1xgzwwx",
+        "columns": null
+      },
+      "id": "Field_1d4wjtv"
+    },
+    {
+      "label": "Código del proceso",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_18vsz6u",
+        "columns": null
+      },
+      "id": "Field_1smt0vz",
+      "key": "textfield_mf9z5u",
+      "disabled": false,
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Fecha de ingreso del correo",
+      "subtype": "date",
+      "dateLabel": "Fecha ingreso del correo",
+      "type": "date",
+      "layout": {
+        "row": "Row_18vsz6u",
+        "columns": null
+      },
+      "id": "Field_1w5lyn9",
+      "key": "datetime_on6lvmt"
+    },
+    {
+      "label": "Hora de ingreso del correo",
+      "subtype": "time",
+      "type": "time",
+      "layout": {
+        "row": "Row_18vsz6u",
+        "columns": null
+      },
+      "id": "Field_0chklla",
+      "key": "datetime_zml4zs",
+      "timeLabel": "Hora ingreso del correo",
+      "timeSerializingFormat": "utc_offset",
+      "timeInterval": 15
+    }
+  ],
+  "type": "default",
+  "id": "Form_17j21mh",
+  "exporter": {
+    "name": "form-js (https://demo.bpmn.io)",
+    "version": "1.15.0"
+  },
+  "schemaVersion": 18
+}

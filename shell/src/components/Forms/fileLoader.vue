@@ -13,6 +13,7 @@
     >
       <!-- Input HTML nativo transparente que cubre toda el área -->
       <input
+        :ref="setFileRef"
         type="file"
         :multiple="props.multiple"
         :accept="props.accept"
@@ -46,12 +47,7 @@
         style="position: relative; z-index: 1; pointer-events: none"
       >
         <div class="row justify-center items-center q-mb-sm">
-          <q-icon
-            name="add_circle"
-            size="24px"
-            color="primary"
-            class="q-mr-sm"
-          ></q-icon>
+          <q-icon name="add_circle" size="24px" color="primary" class="q-mr-sm"></q-icon>
           <b>Clic aquí para cargar más archivos</b>
         </div>
       </div>
@@ -84,7 +80,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, watch } from "vue";
+import { computed, ref, watch } from 'vue';
 // Importaciones explícitas de Quasar para MF
 
 type FileValue = File[] | File | null;
@@ -98,26 +94,25 @@ interface FileLoaderProps {
 
 const props = withDefaults(defineProps<FileLoaderProps>(), {
   modelValue: null,
-  hint: "",
+  hint: '',
   multiple: true,
-  accept: "*/*",
+  accept: '*/*',
 });
 
 const emit = defineEmits<{
-  "update:modelValue": [value: FileValue];
+  'update:modelValue': [value: FileValue];
 }>();
 
-// Eliminado fileRef y setFileRef, ya no se usan
+let fileRef: HTMLInputElement | null = null;
+
+const setFileRef = (el: any) => {
+  fileRef = el;
+};
 
 // Computed para verificar si hay archivos de forma segura
 const hasFiles = computed(() => {
   const val = props.modelValue;
-  console.log(
-    "hasFiles computed - modelValue:",
-    val,
-    "isArray:",
-    Array.isArray(val)
-  );
+  console.log('hasFiles computed - modelValue:', val, 'isArray:', Array.isArray(val));
   if (Array.isArray(val)) {
     return val.length > 0;
   }
@@ -127,7 +122,7 @@ const hasFiles = computed(() => {
 // Computed para obtener el array de archivos
 const fileArray = computed(() => {
   const val = props.modelValue;
-  console.log("fileArray computed - modelValue:", val);
+  console.log('fileArray computed - modelValue:', val);
   if (Array.isArray(val)) {
     return val;
   }
@@ -138,14 +133,9 @@ const fileArray = computed(() => {
 watch(
   () => props.modelValue,
   (val) => {
-    console.log(
-      "[FileLoader] modelValue changed:",
-      val,
-      "isArray:",
-      Array.isArray(val)
-    );
+    console.log('[FileLoader] modelValue changed:', val, 'isArray:', Array.isArray(val));
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 function onFileChange(event: Event) {
@@ -155,7 +145,7 @@ function onFileChange(event: Event) {
     const validFiles = checkFileSize(filesArray);
 
     if (validFiles.length === 0) {
-      console.warn("Todos los archivos exceden el tamaño máximo de 50MB");
+      console.warn('Todos los archivos exceden el tamaño máximo de 50MB');
       return;
     }
 
@@ -176,12 +166,12 @@ function onFileChange(event: Event) {
       newValue = validFiles[0] || null;
     }
 
-    console.log("Emitting files:", newValue);
-    console.log("Is array?", Array.isArray(newValue));
-    emit("update:modelValue", newValue);
+    console.log('Emitting files:', newValue);
+    console.log('Is array?', Array.isArray(newValue));
+    emit('update:modelValue', newValue);
 
     // Resetear el input para permitir seleccionar el mismo archivo nuevamente
-    target.value = "";
+    target.value = '';
   }
 }
 
@@ -194,13 +184,20 @@ function removeFile(index: number) {
   if (Array.isArray(props.modelValue)) {
     const newFiles = [...props.modelValue];
     newFiles.splice(index, 1);
-    console.log("Removing file, new array:", newFiles);
-    emit("update:modelValue", newFiles.length > 0 ? newFiles : null);
+    console.log('Removing file, new array:', newFiles);
+    emit('update:modelValue', newFiles.length > 0 ? newFiles : null);
   } else if (props.modelValue) {
     // Si es un solo archivo, emitir null
-    emit("update:modelValue", null);
+    emit('update:modelValue', null);
   }
 }
 
-// Eliminada función openPicker porque no se usa
+function openPicker() {
+  console.log('openPicker called', fileRef);
+  if (fileRef) {
+    fileRef.click();
+  } else {
+    console.error('fileRef is null');
+  }
+}
 </script>

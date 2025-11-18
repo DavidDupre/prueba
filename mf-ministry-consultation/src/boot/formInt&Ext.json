@@ -1,0 +1,253 @@
+{
+  "components": [
+    {
+      "label": "¿Con copia? *",
+      "values": [
+        {
+          "label": "Interna",
+          "value": "1"
+        },
+        {
+          "label": "Externa",
+          "value": "2"
+        },
+        {
+          "label": "Interna y Externa",
+          "value": "3"
+        },
+        {
+          "label": "Ninguna",
+          "value": "4"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0lg49yr",
+        "columns": null
+      },
+      "id": "Field_0s78ygy",
+      "key": "select_vq4r6s",
+      "properties": {}
+    }
+  ],
+  "Interno": {
+    "components": [
+      {
+        "label": "Dependencias *",
+        "values": [
+          {
+            "label": "Dependencia A",
+            "value": "dep1"
+          },
+          {
+            "label": "Dependencia B",
+            "value": "dep2"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0oq42d6",
+          "columns": null
+        },
+        "id": "Field_0tyg3i9",
+        "key": "select_x36yco",
+        "disabled": false,
+        "readonly": false,
+        "validate": {
+          "required": true
+        }
+      },
+      {
+        "label": "Nombre funcionario*",
+        "values": [
+          {
+            "label": "Juan Pérez",
+            "value": "func1"
+          },
+          {
+            "label": "Ana Gómez",
+            "value": "func2"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0oq42d6",
+          "columns": null
+        },
+        "id": "Field_11k39iq",
+        "key": "select_fozj6c",
+        "validate": {
+          "required": true
+        }
+      }
+    ]
+  },
+  "Externa": {
+    "components": [
+      {
+        "label": "Forma de envío*",
+        "values": [
+          {
+            "label": "Correo electrónico",
+            "value": "correo"
+          },
+          {
+            "label": "Correo electrónico certificado",
+            "value": "correoCertificado"
+          },
+          {
+            "label": "Courrier",
+            "value": "courrier"
+          },
+          {
+            "label": "Mensajería",
+            "value": "mensajeria"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_03pjwdt",
+          "columns": null
+        },
+        "id": "Field_0pfba1u",
+        "key": "select_vf78y9",
+        "validate": {
+          "required": true
+        }
+      },
+      {
+        "label": "Tipo de documento de destinatario*",
+        "values": [
+          {
+            "label": "Cédula",
+            "value": "cedula"
+          },
+          {
+            "label": "Pasaporte",
+            "value": "pasaporte"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_03pjwdt",
+          "columns": null
+        },
+        "id": "Field_1trvheh",
+        "key": "select_k2n67m",
+        "validate": {
+          "required": true
+        }
+      },
+      {
+        "label": "Número de documento de destinatario*",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_0rnzy4l",
+          "columns": null
+        },
+        "id": "Field_1lmp98i",
+        "key": "textfield_j6ugv",
+        "validate": {
+          "required": true
+        }
+      },
+      {
+        "label": "Nombre del destinatario*",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_0rnzy4l",
+          "columns": null
+        },
+        "id": "Field_13vd9is",
+        "key": "textfield_jl89n"
+      },
+      {
+        "label": "Dirección del destinatario*",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_0tnms98",
+          "columns": null
+        },
+        "id": "Field_1ffbink",
+        "key": "textfield_bjap4s",
+        "validate": {
+          "required": true
+        }
+      },
+      {
+        "label": "País del destinatario*",
+        "values": [
+          {
+            "label": "Colombia",
+            "value": "colombia"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0tnms98",
+          "columns": null
+        },
+        "id": "Field_1ycfgp1",
+        "key": "select_d52bmf"
+      },
+      {
+        "label": "Departamento del destinatario*",
+        "values": [
+          {
+            "label": "Bogotá D.C.",
+            "value": "bogota"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_13id2om",
+          "columns": null
+        },
+        "id": "Field_0xcyuns",
+        "key": "select_m4wawp"
+      },
+      {
+        "label": "Municipio del destinatario*",
+        "values": [
+          {
+            "label": "Bogotá D.C.",
+            "value": "bogota"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_13id2om",
+          "columns": null
+        },
+        "id": "Field_1cvtoun",
+        "key": "select_41lgzq"
+      },
+      {
+        "label": "Teléfono del destinatario*",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_1yr42f9",
+          "columns": null
+        },
+        "id": "Field_1738s7a",
+        "key": "textfield_rtbei"
+      },
+      {
+        "label": "Correo electrónico del destinatario*",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_1yr42f9",
+          "columns": null
+        },
+        "id": "Field_0930rzb",
+        "key": "textfield_khbhmb",
+        "validate": {
+          "validationType": "email",
+          "required": true
+        }
+      }
+    ]
+  },
+  "schemaVersion": 18,
+  "id": "Form_0lggqzv"
+}

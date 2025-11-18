@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import mfFormsRoutes from "@mf-forms/router/routes";
 import mfProcesoJuridicoRoutes from "@mf-procesoJuridico/router/routes";
-console.log(mfProcesoJuridicoRoutes)
+console.log(mfProcesoJuridicoRoutes);
 
 const routes: RouteRecordRaw[] = [
   {

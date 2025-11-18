@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
 
-defineProps({
+const props = defineProps({
   modelValue: { type: [String, Number], default: "" },
   label: { type: String, default: "" },
   placeholder: { type: String, default: "" },

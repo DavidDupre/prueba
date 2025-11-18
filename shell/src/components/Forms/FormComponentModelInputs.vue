@@ -26,11 +26,7 @@
             @update:model-value="setFieldValue(input, $event)"
             :placeholder="getPlaceholder(input)"
             :type="
-              input.type === 'textarea'
-                ? 'textarea'
-                : input.type === 'number'
-                ? 'number'
-                : 'text'
+              input.type === 'textarea' ? 'textarea' : input.type === 'number' ? 'number' : 'text'
             "
             :rows="input.type === 'textarea' ? 5 : undefined"
             dense
@@ -86,23 +82,14 @@
           >
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy
-                  cover
-                  transition-show="scale"
-                  transition-hide="scale"
-                >
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                   <q-date
                     :model-value="getTextValue(input)"
                     @update:model-value="setFieldValue(input, $event)"
                     mask="YYYY-MM-DD"
                   >
                     <div class="row items-center justify-end">
-                      <q-btn
-                        v-close-popup
-                        label="Cerrar"
-                        color="primary"
-                        flat
-                      />
+                      <q-btn v-close-popup label="Cerrar" color="primary" flat />
                     </div>
                   </q-date>
                 </q-popup-proxy>
@@ -123,23 +110,14 @@
           >
             <template v-slot:append>
               <q-icon name="access_time" class="cursor-pointer">
-                <q-popup-proxy
-                  cover
-                  transition-show="scale"
-                  transition-hide="scale"
-                >
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                   <q-time
                     :model-value="getTextValueAsString(input)"
                     @update:model-value="setFieldValue(input, $event)"
                     format24h
                   >
                     <div class="row items-center justify-end">
-                      <q-btn
-                        v-close-popup
-                        label="Cerrar"
-                        color="primary"
-                        flat
-                      />
+                      <q-btn v-close-popup label="Cerrar" color="primary" flat />
                     </div>
                   </q-time>
                 </q-popup-proxy>
@@ -165,9 +143,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from "vue";
-import type { FormStructure, Input } from "./index";
-import FileLoader from "./fileLoader.vue";
+import { computed, reactive, watch } from 'vue';
+import type { FormStructure, Input } from './index';
+import FileLoader from './fileLoader.vue';
 
 const props = defineProps<{
   form: FormStructure;
@@ -175,15 +153,14 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", v: Record<string, unknown>): void;
+  (e: 'update:modelValue', v: Record<string, unknown>): void;
 }>();
 
 // current object fallback
 const current = computed(() => props.modelValue ?? {});
 
 // helper key
-const keyFor = (input: Input) =>
-  input.label || input.nombre || input.key || input.name || "";
+const keyFor = (input: Input) => input.label || input.nombre || input.key || input.name || '';
 
 // reactive container de valores
 const fieldValues = reactive<Record<string, unknown>>({});
@@ -192,7 +169,7 @@ const fieldValues = reactive<Record<string, unknown>>({});
 const getTextValue = (input: Input): string | number | null => {
   const key = keyFor(input);
   const value = fieldValues[key];
-  if (typeof value === "string" || typeof value === "number") {
+  if (typeof value === 'string' || typeof value === 'number') {
     return value;
   }
   return null;
@@ -201,10 +178,10 @@ const getTextValue = (input: Input): string | number | null => {
 const getTextValueAsString = (input: Input): string | null => {
   const key = keyFor(input);
   const value = fieldValues[key];
-  if (typeof value === "string") {
+  if (typeof value === 'string') {
     return value;
   }
-  if (typeof value === "number") {
+  if (typeof value === 'number') {
     return String(value);
   }
   return null;
@@ -213,7 +190,7 @@ const getTextValueAsString = (input: Input): string | null => {
 const getSelectValue = (input: Input): string | number | null => {
   const key = keyFor(input);
   const value = fieldValues[key];
-  if (typeof value === "string" || typeof value === "number") {
+  if (typeof value === 'string' || typeof value === 'number') {
     return value;
   }
   return null;
@@ -229,7 +206,7 @@ const getFileValue = (input: Input): File | File[] | null => {
   const key = keyFor(input);
   const value = fieldValues[key];
 
-  console.log("getFileValue:", { key, value, multiple: input.multiple });
+  console.log('getFileValue:', { key, value, multiple: input.multiple });
 
   // Si el input es múltiple, siempre retornar array
   if (input.multiple) {
@@ -257,12 +234,12 @@ const getFileValue = (input: Input): File | File[] | null => {
 
 const setFieldValue = (input: Input, value: unknown) => {
   const key = keyFor(input);
-  console.log("setFieldValue called:", { key, value, type: input.type });
+  console.log('setFieldValue called:', { key, value, type: input.type });
   fieldValues[key] = value;
 
   const next = { ...(current.value || {}) };
   next[key] = value;
-  emit("update:modelValue", next);
+  emit('update:modelValue', next);
 };
 
 function buildFieldValues() {
@@ -272,7 +249,7 @@ function buildFieldValues() {
   }
 
   const hasDefaultValues = (props.form?.inputs || []).some(
-    (input: Input) => input.defaultValue !== undefined
+    (input: Input) => input.defaultValue !== undefined,
   );
 
   (props.form?.inputs || []).forEach((input: Input) => {
@@ -290,7 +267,7 @@ function buildFieldValues() {
         next[k] = input.defaultValue;
       }
     });
-    emit("update:modelValue", next);
+    emit('update:modelValue', next);
   }
 }
 
@@ -299,70 +276,62 @@ buildFieldValues();
 watch(
   () => props.form && props.form.inputs,
   () => buildFieldValues(),
-  { deep: true }
+  { deep: true },
 );
 
 const currentValueFor = (input: Input) => current.value[keyFor(input)];
 
-const isSeparator = (input: Input) =>
-  (input.type || "").toLowerCase() === "separator";
+const isSeparator = (input: Input) => (input.type || '').toLowerCase() === 'separator';
 const isText = (input: Input) =>
-  !input.type || ["text", "string", "textarea", "number"].includes(input.type);
+  !input.type || ['text', 'string', 'textarea', 'number'].includes(input.type);
 const isSelect = (input: Input) =>
-  (input.type || "").toLowerCase() === "select" || Array.isArray(input.options);
-const isFile = (input: Input) => (input.type || "").toLowerCase() === "file";
-const isCheckbox = (input: Input) =>
-  (input.type || "").toLowerCase() === "checkbox";
+  (input.type || '').toLowerCase() === 'select' || Array.isArray(input.options);
+const isFile = (input: Input) => (input.type || '').toLowerCase() === 'file';
+const isCheckbox = (input: Input) => (input.type || '').toLowerCase() === 'checkbox';
 const isDate = (input: Input) =>
-  (input.type || "").toLowerCase() === "date" ||
-  (input.type || "").toLowerCase() === "datetime";
-const isTime = (input: Input) => (input.type || "").toLowerCase() === "time";
+  (input.type || '').toLowerCase() === 'date' || (input.type || '').toLowerCase() === 'datetime';
+const isTime = (input: Input) => (input.type || '').toLowerCase() === 'time';
 
 // Generar placeholder dinámico basado en el tipo de input
 const getPlaceholder = (input: Input): string => {
   if (input.hint) return input.hint;
-  if (isSelect(input)) return "Seleccione";
+  if (isSelect(input)) return 'Seleccione';
 
   // Para textarea, mostrar contador de caracteres
-  if (input.type === "textarea") {
+  if (input.type === 'textarea') {
     const maxLength = getMaxLength(input);
     if (maxLength) {
-      const currentLength = (getTextValue(input) || "").toString().length;
+      const currentLength = (getTextValue(input) || '').toString().length;
       return `${currentLength}/${maxLength}`;
     }
   }
 
-  if (isText(input) || isDate(input) || isTime(input)) return "Inserte";
-  return "";
+  if (isText(input) || isDate(input) || isTime(input)) return 'Inserte';
+  return '';
 };
 
 // Obtener maxLength desde el config
 const getMaxLength = (input: Input): number | undefined => {
-  const config = input.config;
-  if (
-    config &&
-    typeof config === "object" &&
-    "validate" in config &&
-    typeof (config as { validate?: { maxLength?: number } }).validate ===
-      "object"
-  ) {
-    const validateObj = (config as { validate?: { maxLength?: number } })
-      .validate;
-    return typeof validateObj?.maxLength === "number"
-      ? validateObj.maxLength
-      : undefined;
-  }
-  return undefined;
+  const config = input.config as any;
+  return config?.validate?.maxLength;
 };
 
-// ...existing code...
+// Obtener el contador de caracteres para textarea
+const getCharCounter = (input: Input): string => {
+  if (input.type !== 'textarea') return '';
+  const maxLength = getMaxLength(input);
+  if (!maxLength) return '';
+
+  const currentLength = (getTextValue(input) || '').toString().length;
+  return `${currentLength}/${maxLength}`;
+};
 
 // Agrupar inputs por row para calcular columnas automáticamente
 const inputsByRow = computed(() => {
   const grouped = new Map<string, Input[]>();
 
   (props.form?.inputs || []).forEach((input: Input) => {
-    const rowKey = input.layout?.row || "default";
+    const rowKey = input.layout?.row || 'default';
     if (!grouped.has(rowKey)) {
       grouped.set(rowKey, []);
     }
@@ -380,27 +349,28 @@ const getColumnClass = (input: Input) => {
   }
 
   // Textarea y file ocupan ancho completo
-  const type = (input.type || "").toLowerCase();
-  if (type === "textarea" || type === "file") {
-    return "col-12";
+  const type = (input.type || '').toLowerCase();
+  if (type === 'textarea' || type === 'file') {
+    return 'col-12';
   }
 
   // Separator ocupa ancho completo solo si no tiene className
-  // ...existing code...
+  if (type === 'separator') {
+  }
 
   // Calcular columnas basadas en cuántos campos hay en la misma row
-  const rowKey = input.layout?.row || "default";
+  const rowKey = input.layout?.row || 'default';
   const fieldsInRow = inputsByRow.value.get(rowKey)?.length || 1;
 
   if (fieldsInRow === 2) {
-    return "col-xs-12 col-sm-6 col-md-6";
+    return 'col-xs-12 col-sm-6 col-md-6';
   } else if (fieldsInRow === 3) {
-    return "col-xs-12 col-sm-6 col-md-4";
+    return 'col-xs-12 col-sm-6 col-md-4';
   } else if (fieldsInRow >= 4) {
-    return "col-xs-12 col-sm-6 col-md-3";
+    return 'col-xs-12 col-sm-6 col-md-3';
   }
 
   // Por defecto, ancho completo
-  return "col-12";
+  return 'col-12';
 };
 </script>

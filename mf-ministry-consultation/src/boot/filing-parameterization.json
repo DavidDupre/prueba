@@ -1,0 +1,179 @@
+{
+  "inputs": [
+    {
+      "label": "Etapa Procesal*",
+      "values": [
+
+        {
+          "label": "Proceso Sancionatorio",
+          "value": "PROCESO_SANCIONATORIO"
+        }
+
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_10v9ysx",
+        "columns": null
+      },
+      "class": "col-xs-12 col-sm-6 col-md-3",
+      "class": "col-xs-12 col-sm-12 col-md-6",
+      "id": "Field_08zmrk3",
+      "key": "select_u16tg",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Subetapa procesal*",
+      "values": [
+        {
+          "label": "Citación Notificación",
+          "value": "CITACION_NOTIFICACION"
+        },
+        {
+          "label": "Formulación de Cargos  - Descargos",
+          "value": "FORMULACION_CARGOS_DESCARGOS"
+        },
+        {
+          "label": "Traslado Respuesta de Descargos a la Contraparte",
+          "value": "TRASLADO_RESPUESTA_DESCARGOS"
+        },
+        {
+          "label": "Alegatos de Conclusión - Respuesta Alegatos",
+          "value": "ALEGATOS_CONCLUSION_RESPUESTA"
+        },
+        {
+          "label": "Auto de Cierre de Alegatos y Medios Probatorios",
+          "value": "AUTO_CIERRE_ALEGATOS_MEDIOS"
+        },
+        {
+          "label": "Citación Notificación Resolución Proceso Administrativo Sancionatorio",
+          "value": "CITACION_NOTIFICACION_RESOLUCION"
+        },
+        {
+          "label": "Resolución que Resuelve Proceso Administrativo Sancionatorio",
+          "value": "RESOLUCION_PROCESO_SANCIONATORIO"
+        },
+        {
+          "label": "Resuelve Recurso de Reposición",
+          "value": "RESUELVE_RECURSO_REPOSICION"
+        },
+        {
+          "label": "Resuelve Recurso de Queja",
+          "value": "RESUELVE_RECURSO_QUEJA"
+        },
+        {
+          "label": "Resuelve Recurso de Reposición Posterior al  Recurso de Queja",
+          "value": "RESUELVE_REPOSICION_POST_QUEJA"
+        },
+        {
+          "label": "Resuelve Recurso de Apelación",
+          "value": "RESUELVE_RECURSO_APELACION"
+        },
+        {
+          "label": "Resolución Resuelve Apelación Posterior a Queja",
+          "value": "RESOLUCION_APELACION_POST_QUEJA"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_10v9ysx",
+        "columns": null
+      },
+      "class": "col-xs-12 col-sm-6 col-md-3",
+      "class": "col-xs-12 col-sm-12 col-md-6",
+      "id": "Field_1qqav8r",
+      "key": "select_hkdbv6",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "cantidad": [
+    {
+      "label": "Unidad de tiempo",
+      "values": [
+        {
+          "label": "Días",
+          "value": "DIAS"
+        },
+        {
+          "label": "Horas",
+          "value": "HORAS"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_10v9ysx",
+        "columns": null
+      },
+      "class": "col-xs-12 col-sm-6 col-md-2",
+      "id": "Field_1gqj4k9",
+      "key": "select_dft75o"
+    },
+    {
+      "label": "Cantidad",
+      "values": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "3",
+          "value": "3"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
+        },
+        {
+          "label": "6",
+          "value": "6"
+        },
+        {
+          "label": "7",
+          "value": "7"
+        },
+        {
+          "label": "8",
+          "value": "8"
+        },
+        {
+          "label": "9",
+          "value": "9"
+        },
+        {
+          "label": "10",
+          "value": "10"
+        },
+        {
+          "label": "15",
+          "value": "15"
+        },
+        {
+          "label": "30",
+          "value": "30"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_10v9ysx",
+        "columns": null
+      },
+      "class": "col-xs-12 col-sm-6 col-md-2",
+      "id": "Field_1ufed5a",
+      "key": "select_ei1tv7"
+    }
+  ],
+  "schemaVersion": 18,
+  "type": "default",
+  "id": "Form_19p4y0w"
+}

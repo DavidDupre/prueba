@@ -1,0 +1,25 @@
+{
+  "extends": "./.quasar/tsconfig.json", 
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ESNext",
+    "types": ["vite/client"],
+    "paths": {
+      "#q-app/*": ["src/*"],
+      "src/*": ["src/*"],
+      "app/*": ["src/*"],
+      "boot/*":["src/boot/*"],
+      "@constants/*":["src/constants/*"],
+      "components/*": ["src/components/*"],
+      "layouts/*": ["src/layouts/*"],
+      "pages/*": ["src/pages/*"],
+      "@mf-forms/*": ["../mf-forms/src/*"],
+      "@shell/*": ["../shell/src/*"]
+    }
+  },
+  "exclude": [
+    "dist",
+    ".quasar",
+    "node_modules"
+  ]
+}

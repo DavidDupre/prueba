@@ -1,0 +1,283 @@
+{
+  "components": [
+    {
+      "label": "Dependencia *",
+      "values": [
+        {
+          "label": "Gerencia Juridica",
+          "value": "gerencia_juridica"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0oq42d6",
+        "columns": null
+      },
+      "id": "Field_0tyg3i9",
+      "key": "select_x36yco",
+      "disabled": false,
+      "readonly": false,
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Series * ",
+      "values": [
+        {
+          "label": "Actas",
+          "value": "actas"
+        },
+        {
+          "label": "Informes",
+          "value": "informes"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0oq42d6",
+        "columns": null
+      },
+      "id": "Field_11k39iq",
+      "key": "select_fozj6c",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Subseries *",
+      "values": [
+        {
+          "label": "Informes a entes de control",
+          "value": "informes"
+        },
+        {
+          "label": "Informes de gestión",
+          "value": "informes_gestion"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0oq42d6",
+        "columns": null
+      },
+      "id": "Field_0pfba1u",
+      "key": "select_vf78y9",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Tipo de documental*",
+      "values": [
+        {
+          "label": "Informe",
+          "value": "informe"
+        },
+        {
+          "label": "Comunicaciones",
+          "value": "comunicaciones"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_03pjwdt",
+        "columns": null
+      },
+      "id": "Field_1trvheh",
+      "key": "select_k2n67m",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Expedientes*",
+      "values": [
+        {
+          "label": "EXP-24032-3124235231",
+          "value": "exp_1"
+        },
+        {
+          "label": "EXP-24032-3124235232",
+          "value": "exp_2"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_03pjwdt",
+        "columns": null
+      },
+      "id": "Field_1lmp98i",
+      "key": "select_j6ugv",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "Interno": {
+    "components": [
+      {
+        "label": "Dependencia *",
+        "values": [
+        {
+          "label": "Gerencia Juridica",
+          "value": "gerencia_juridica"
+        }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0km865i",
+          "columns": null
+        },
+        "id": "Field_1ortbge",
+        "key": "select_kse95",
+        "validate": {
+          "required": false
+        }
+      },
+      {
+        "label": "Series",
+      "values": [
+        {
+          "label": "Actas",
+          "value": "actas"
+        },
+        {
+          "label": "Informes",
+          "value": "informes"
+        }
+      ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0km865i",
+          "columns": null
+        },
+        "id": "Field_01kw675",
+        "key": "select_uoaxdr"
+      },
+      {
+        "label": "Subseries ",
+      "values": [
+        {
+          "label": "Informes a entes de control",
+          "value": "informes"
+        },
+        {
+          "label": "Informes de gestión",
+          "value": "informes_gestion"
+        }
+      ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0pvd1ax",
+          "columns": null
+        },
+        "id": "Field_1sb093l",
+        "key": "select_zduke"
+      },
+      {
+        "label": "Tipo documental *",
+      "values": [
+        {
+          "label": "Informe",
+          "value": "informe"
+        },
+        {
+          "label": "Comunicaciones",
+          "value": "comunicaciones"
+        }
+      ],
+        "type": "select",
+        "layout": {
+          "row": "Row_0pvd1ax",
+          "columns": null
+        },
+        "id": "Field_1dytexc",
+        "key": "select_jefs6f",
+        "validate": {
+          "required": true
+        }
+      },
+      {
+        "label": "Código de Proceso * ",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_1ccla8d",
+          "columns": null
+        },
+        "id": "Field_0lgduil",
+        "key": "textfield_4lmdak"
+      },
+      {
+        "label": "Número de identificación * ",
+        "type": "textfield",
+        "layout": {
+          "row": "Row_1ccla8d",
+          "columns": null
+        },
+        "id": "Field_1i2neqd",
+        "key": "textfield_qiylq"
+      },
+      {
+        "label": "Expedientes *",
+        "values": [
+        {
+          "label": "EXP-24032-3124235231",
+          "value": "exp_1"
+        },
+        {
+          "label": "EXP-24032-3124235232",
+          "value": "exp_2"
+        }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_1aw1zz7",
+          "columns": null
+        },
+        "id": "Field_1ie46k4",
+        "key": "select_q1yuf5",
+        "validate": {
+          "required": true
+        },
+        "disabled": true,
+        "className": "col-xs-12 col-sm-6 col-md-6"
+      },
+      {
+        "label": "Responsable del Expediente *",
+        "values": [
+          {
+            "label": "Value",
+            "value": "value"
+          }
+        ],
+        "type": "select",
+        "layout": {
+          "row": "Row_1aw1zz7",
+          "columns": null
+        },
+        "id": "Field_1kfnw1e",
+        "key": "select_mn211o",
+        "validate": {
+          "required": true
+        },
+        "disabled": true
+      },
+      {
+        "label": "Observaciones *",
+        "type": "textarea",
+        "layout": {
+          "row": "Row_1se7if9",
+          "columns": null
+        },
+        "id": "Field_1uplskn",
+        "key": "textarea_l99ucv",
+        "validate": {
+          "required": true
+        }
+      }
+    ]
+  },
+  "schemaVersion": 18,
+  "id": "Form_0lggqzv"
+}

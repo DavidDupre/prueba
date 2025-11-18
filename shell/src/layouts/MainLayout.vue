@@ -1,102 +1,48 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+  <div class="q-pa-xl">
+    <div class="q-mb-lg">
+      <h5 class="text-h5 q-ma-none q-mb-md" style="font-weight: 600">
+        Remitente
+      </h5>
+    </div>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+    <FormComponentModel v-model="formData" :form="finalForm" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { computed, reactive } from "vue";
+import FormJs from "../boot/form.json";
+import FormComponentModel from "../components/Forms/FormComponentModel.vue";
+import { fieldConfigParser } from "../components/Forms/formParser";
 
-const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+const props = defineProps<{
+  cotizacionId?: string | number;
+  isEdit?: boolean;
+  isCotFromCore: boolean;
+  ramo: number;
+}>();
+
+// estado reactivo para los valores del formulario (v-model)
+const formData = reactive<Record<string, unknown>>({});
+
+// helper que soporta tanto JSON-objeto como función exportada
+const resolveFormSource = (src: unknown, ramo: number | string) => {
+  if (typeof src === "function") {
+    return src(ramo);
   }
-];
+  const key = String(ramo);
+  return src && typeof src === "object" && key in src
+    ? (src as Record<string, unknown>)[key]
+    : src;
+};
 
-const leftDrawerOpen = ref(false);
+const formFieldsDatosGenerales = computed(() => {
+  const resolved = resolveFormSource(FormJs, props.ramo);
+  return resolved;
+});
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+const finalForm = computed(() =>
+  fieldConfigParser(formFieldsDatosGenerales.value)
+);
 </script>

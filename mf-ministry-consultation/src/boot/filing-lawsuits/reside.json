@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 16,
+    "exporter": {
+      "name": "Camunda Modeler",
+      "version": "5.0.0"
+    },
+    "components": [
+        {
+            "label": "Documento adjuntos*",
+            "type": "filepicker",
+            "id": "Field_documentosAdjuntos",
+            "key": "documentosAdjuntos",
+            "validate": {
+              "required": true,
+              "validationMessage": "Debe adjuntar al menos un documento"
+            },
+            "layout": {
+              "row": "Row_0",
+              "columns": null
+            }
+          }
+    ],
+    "type": "Hechos demanda",
+    "id": "form_hechos_demanda",
+    "executionPlatform": "Camunda Cloud",
+    "executionPlatformVersion": "8.2.0"
+  }

@@ -1,0 +1,140 @@
+{
+  "components": [
+    {
+      "label": "Asunto de escalamiento*",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1w1cjk7",
+        "columns": null
+      },
+      "id": "Field_0bm3hzl",
+      "key": "textfield_3omgwf",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Radicación de entrada",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1w1cjk7",
+        "columns": null
+      },
+      "id": "Field_1s56ge6",
+      "key": "textfield_cyi7w",
+      "disabled": true
+    },
+    {
+      "label": "Tipo de documento*",
+        "values": [
+          {
+            "label": "Cédula",
+            "value": "cedula"
+          },
+          {
+            "label": "Pasaporte",
+            "value": "pasaporte"
+          }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_0cs5tif",
+        "columns": null
+      },
+      "id": "Field_08od6qr",
+      "key": "select_nwv7ud",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Número de documento*",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0cs5tif",
+        "columns": null
+      },
+      "id": "Field_177uk31",
+      "key": "textfield_p31jy8",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Nombre del afectado*",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_03b7w15",
+        "columns": null
+      },
+      "id": "Field_0085y6l",
+      "key": "textfield_g8mwoc",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Fecha notificado Positiva*",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_03b7w15",
+        "columns": null
+      },
+      "id": "Field_092io9s",
+      "key": "datetime_wqn34s",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Observaciones*:",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0mqk0hg",
+        "columns": null
+      },
+      "id": "Field_0qlugy1",
+      "key": "textarea_pbpmii"
+    },
+    {
+      "label": "Documento adjuntos*",
+      "type": "file",
+      "multiple": true,
+      "id": "Field_anexos_upload",
+      "key": "anexos_upload",
+      "validate": {
+        "maxFiles": 30,
+        "maxSizeMB": 50
+      },
+      "hint": "Máximo 30 archivos, 50MB cada uno"
+    }
+  ],
+  "respuesta": {
+    "components": [
+      {
+        "label": "Respuesta de escalamiento:",
+        "type": "textarea",
+        "id": "Field_solicitud_comentarios",
+        "key": "solicitud_comentarios",
+        "validate": {
+          "minLength": 10,
+          "maxLength": 10000,
+          "customMessage": "El campo Comentarios es requerido"
+        }
+      },
+      {
+        "label": "Documento adjuntos*",
+        "type": "file",
+        "id": "Field_anexos_upload",
+        "key": "anexos_upload",
+        "multiple": true,
+        "validate": {
+          "maxFiles": 30,
+          "maxSizeMB": 50
+        }
+      }
+    ]
+  },
+  "schemaVersion": 18,
+  "id": "Form_1jfv6p2"
+}

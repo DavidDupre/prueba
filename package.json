@@ -4,16 +4,33 @@
   "private": true,
   "workspaces": [
     "shell",
-    "FrontProLinkTICDemo"
+    "mf-forms",
+    "mf-procesoJuridico",
+    "FrontProLinkTICDemo",
+    "mf-ministry-consultation"
   ],
   "scripts": {
+    "dev:shell": "npm run dev --workspace=shell",
+    "dev:forms": "npm run dev --workspace=mf-forms",
+    "dev:FrontProLinkTICDemo": "npm run dev --workspace=FrontProLinkTICDemo",
+    "dev:procesoJuridico": "npm run dev --workspace=mf-procesoJuridico",
+    "dev:ministry-consultation": "npm run dev --workspace=mf-ministry-consultation",
+    "dev:all": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
     "install:all": "npm install --workspaces"
   },
   "dependencies": {
+    "@originjs/vite-plugin-federation": "^1.4.1",
+    "fraction.js": "^5.3.4",
+    "path": "^0.12.7",
     "quasar": "^2.6.0",
     "vue": "^3.0.0"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22"
   }
 }

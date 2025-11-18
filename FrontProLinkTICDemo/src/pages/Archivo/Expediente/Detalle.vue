@@ -100,10 +100,12 @@ onMounted(async () => {
     if (initial) activeTab.value = initial as string;
 
     // Obtener datos del expediente
-    const response = await sgdeaArchivoAxios.get(`/record/positiva/detail?name=${id}`);
+    const response = await sgdeaArchivoAxios.get(
+      `/record/positiva/detail?name=${id}`,
+    );
 
     const responseDetails = await sgdeaArchivoAxios.get(
-      `/alfresco/nodes/${response.data.nodeId}/details`
+      `/alfresco/nodes/${response.data.nodeId}/details`,
     );
 
     dataExpediente.value = response.data;
@@ -112,7 +114,6 @@ onMounted(async () => {
       ...response.data,
       ...responseDetails.data,
     };
-
   } catch (error) {
     console.error(error);
   } finally {
