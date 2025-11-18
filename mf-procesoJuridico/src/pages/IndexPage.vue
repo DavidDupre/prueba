@@ -75,7 +75,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import MainContainer from '../../../mf-ministry-consultation/src/components/MainContainer.vue';
+import MainContainer from '../components/MainContainer.vue';
 import FormStep1 from '../components/FormStep1.vue';
 import FormStep2 from '../components/FormStep2.vue';
 import FormStep3 from '../components/FormStep3.vue';

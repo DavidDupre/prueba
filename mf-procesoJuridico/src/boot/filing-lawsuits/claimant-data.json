@@ -1,0 +1,405 @@
+{
+    "components": [
+      {
+        "label": "Tipo de documento",
+        "type": "select",
+        "id": "Field_tipoDocumentoDemandante",
+        "key": "tipoDocumentoDemandante",
+        "validate": {
+          "required": true
+        },
+        "values": [
+          {
+            "label": "Cédula de Ciudadanía",
+            "value": "CC"
+          },
+          {
+            "label": "Cédula de Extranjería",
+            "value": "CE"
+          },
+          {
+            "label": "Pasaporte",
+            "value": "PASAPORTE"
+          },
+          {
+            "label": "NIT",
+            "value": "NIT"
+          }
+        ],
+        "layout": {
+          "row": "Row_2",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Número de documento",
+        "type": "textfield",
+        "id": "Field_numeroDocumentoDemandante",
+        "key": "numeroDocumentoDemandante",
+        "validate": {
+          "required": true,
+          "pattern": "^[0-9]+$",
+          "validationMessage": "Ingrese solo números"
+        },
+        "layout": {
+          "row": "Row_2",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Primer nombre",
+        "type": "textfield",
+        "id": "Field_primerNombreDemandante",
+        "key": "primerNombreDemandante",
+        "validate": {
+          "required": true,
+          "minLength": 2,
+          "validationMessage": "Ingrese al menos 2 caracteres"
+        },
+        "layout": {
+          "row": "Row_2",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Segundo nombre",
+        "type": "textfield",
+        "id": "Field_segundoNombreDemandante",
+        "key": "segundoNombreDemandante",
+        "layout": {
+          "row": "Row_3",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Primer apellido",
+        "type": "textfield",
+        "id": "Field_primerApellidoDemandante",
+        "key": "primerApellidoDemandante",
+        "validate": {
+          "required": true,
+          "minLength": 2,
+          "validationMessage": "Ingrese al menos 2 caracteres"
+        },
+        "layout": {
+          "row": "Row_3",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Segundo apellido",
+        "type": "textfield",
+        "id": "Field_segundoApellidoDemandante",
+        "key": "segundoApellidoDemandante",
+        "layout": {
+          "row": "Row_3",
+          "columns": 4
+        }
+      },
+      {
+        "label": "¿Pertenece a la comunidad LGTBIQ+?",
+        "type": "select",
+        "id": "Field_lgtbiqDemandante",
+        "key": "lgtbiqDemandante",
+        "values": [
+          {
+            "label": "Sí",
+            "value": "si"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          },
+          {
+            "label": "Prefiero no responder",
+            "value": "no_responder"
+          }
+        ],
+        "layout": {
+          "row": "Row_4",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Sexo",
+        "type": "select",
+        "id": "Field_sexoDemandante",
+        "key": "sexoDemandante",
+        "validate": {
+          "required": true
+        },
+        "values": [
+          {
+            "label": "Masculino",
+            "value": "M"
+          },
+          {
+            "label": "Femenino",
+            "value": "F"
+          },
+          {
+            "label": "Otro",
+            "value": "OTRO"
+          }
+        ],
+        "layout": {
+          "row": "Row_4",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Condición especial",
+        "type": "select",
+        "id": "Field_condicionEspecialDemandante",
+        "key": "condicionEspecialDemandante",
+        "validate": {
+          "required": true
+        },
+        "values": [
+          {
+            "label": "Ninguna",
+            "value": "NINGUNA"
+          },
+          {
+            "label": "Discapacidad",
+            "value": "DISCAPACIDAD"
+          },
+          {
+            "label": "Adulto mayor",
+            "value": "ADULTO_MAYOR"
+          },
+          {
+            "label": "Mujer gestante",
+            "value": "MUJER_GESTANTE"
+          },
+          {
+            "label": "Víctima del conflicto",
+            "value": "VICTIMA_CONFLICTO"
+          }
+        ],
+        "layout": {
+          "row": "Row_4",
+          "columns": 4
+        }
+      },
+      {
+        "type": "checkbox",
+        "id": "Field_mismoDatosCausante",
+        "key": "Los datos del causante son los mismos que los del demandante",
+        "layout": {
+          "row": "Row_5",
+          "columns": null
+        }
+      },
+      {
+        "text": "Datos del causante y/o asegurado",
+        "type": "text",
+        "id": "Field_section2",
+        "layout": {
+          "row": "Row_6",
+          "columns": null
+        }
+      },
+      {
+        "label": "Tipo de documento",
+        "type": "select",
+        "id": "Field_tipoDocumentoCausante",
+        "key": "tipoDocumentoCausante",
+        "values": [
+          {
+            "label": "Cédula de Ciudadanía",
+            "value": "CC"
+          },
+          {
+            "label": "Cédula de Extranjería",
+            "value": "CE"
+          },
+          {
+            "label": "Pasaporte",
+            "value": "PASAPORTE"
+          },
+          {
+            "label": "NIT",
+            "value": "NIT"
+          }
+        ],
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_7",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Número de documento",
+        "type": "textfield",
+        "id": "Field_numeroDocumentoCausante",
+        "key": "numeroDocumentoCausante",
+        "validate": {
+          "pattern": "^[0-9]+$",
+          "validationMessage": "Ingrese solo números"
+        },
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_7",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Primer nombre",
+        "type": "textfield",
+        "id": "Field_primerNombreCausante",
+        "key": "primerNombreCausante",
+        "validate": {
+          "minLength": 2,
+          "validationMessage": "Ingrese al menos 2 caracteres"
+        },
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_7",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Segundo nombre",
+        "type": "textfield",
+        "id": "Field_segundoNombreCausante",
+        "key": "segundoNombreCausante",
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_8",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Primer apellido",
+        "type": "textfield",
+        "id": "Field_primerApellidoCausante",
+        "key": "primerApellidoCausante",
+        "validate": {
+          "minLength": 2,
+          "validationMessage": "Ingrese al menos 2 caracteres"
+        },
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_8",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Segundo apellido",
+        "type": "textfield",
+        "id": "Field_segundoApellidoCausante",
+        "key": "segundoApellidoCausante",
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_8",
+          "columns": 4
+        }
+      },
+      {
+        "label": "¿Pertenece a la comunidad LGTBIQ+?",
+        "type": "select",
+        "id": "Field_lgtbiqCausante",
+        "key": "lgtbiqCausante",
+        "values": [
+          {
+            "label": "Sí",
+            "value": "si"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          },
+          {
+            "label": "Prefiero no responder",
+            "value": "no_responder"
+          }
+        ],
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_9",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Sexo",
+        "type": "select",
+        "id": "Field_sexoCausante",
+        "key": "sexoCausante",
+        "values": [
+          {
+            "label": "Masculino",
+            "value": "M"
+          },
+          {
+            "label": "Femenino",
+            "value": "F"
+          },
+          {
+            "label": "Otro",
+            "value": "OTRO"
+          }
+        ],
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_9",
+          "columns": 4
+        }
+      },
+      {
+        "label": "Condición especial",
+        "type": "select",
+        "id": "Field_condicionEspecialCausante",
+        "key": "condicionEspecialCausante",
+        "values": [
+          {
+            "label": "Ninguna",
+            "value": "NINGUNA"
+          },
+          {
+            "label": "Discapacidad",
+            "value": "DISCAPACIDAD"
+          },
+          {
+            "label": "Adulto mayor",
+            "value": "ADULTO_MAYOR"
+          },
+          {
+            "label": "Mujer gestante",
+            "value": "MUJER_GESTANTE"
+          },
+          {
+            "label": "Víctima del conflicto",
+            "value": "VICTIMA_CONFLICTO"
+          }
+        ],
+        "conditional": {
+          "hide": "=mismoDatosCausante = true"
+        },
+        "layout": {
+          "row": "Row_9",
+          "columns": 4
+        }
+      }
+    ],
+    "type": "default",
+    "id": "form_radicacion_demandas",
+    "executionPlatform": "Camunda Cloud",
+    "executionPlatformVersion": "8.2.0"
+  }

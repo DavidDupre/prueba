@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import MainContainer from '../../../mf-ministry-consultation/src/components/MainContainer.vue';
+import MainContainer from '../components/MainContainer.vue';
 import { ref } from 'vue';
 import Chart from '@shell/components/Charts/chart_donuts.vue';
 import TableComponent from '@shell/components/Table.vue';

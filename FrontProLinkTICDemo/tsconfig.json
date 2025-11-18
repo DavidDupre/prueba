@@ -12,7 +12,10 @@
       "@shell/*": [
         "../shell/src/*"
       ],
-    },
+        "boot/*": [
+          "src/boot/*"
+        ]
+      },
     "strict": false,
     "lib": [
       "ES2019",
